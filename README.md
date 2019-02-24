@@ -1,4 +1,4 @@
-# Urban Inisghts Backend
+# Urban Insights Backend
 
 Backend for Urban Insights App.
 
