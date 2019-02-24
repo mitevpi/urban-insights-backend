@@ -1,12 +1,12 @@
 import math
 from flask import Flask
 from flask import request
+from flask.json import jsonify
 import os
-
-resource_path = os.path.join(app.root_path, 'enltk_data')
 
 app = Flask(__name__)
 
+resource_path = os.path.join(app.root_path, 'models')
 
 @app.route("/")
 def hello():
@@ -17,9 +17,18 @@ def hello():
 def func01():
     return "Response for func01"
 
-@app.route("/func01")
-def func01():
-    return "Response for func01"
+
+@app.route("/func02")
+def func02():
+    flines = []
+    filepath = r"models/sf.obj"
+    #outputfile = r"sfParsed.obj"
+    with open(filepath) as f:
+        for fline in f:
+            flines.append(fline.replace("\\", ""))
+    return jsonify({'test': flines})
+    #return flines
+
 
 @app.route("/cutObj")
 def cutObj():
@@ -68,7 +77,7 @@ def cutObj():
     print("Parsing through {} obj objects".format(len(objects)))
 
     for objectnr, object in enumerate(objects):
-        #print("object {}".format(str(objectnr)))
+        # print("object {}".format(str(objectnr)))
 
         for linenr, line in enumerate(object.split("\n")):
             if line[0:2] == "v ":
@@ -80,7 +89,7 @@ def cutObj():
                 # print " - facenr %s" % linenr
                 facevertices = line.split(" ")[1:]
 
-                #facelist = " ,".join(facevertices)
+                # facelist = " ,".join(facevertices)
                 penalty = []
                 temppoints = []
                 tempvertices = []
