@@ -137,4 +137,11 @@ def cutObj():
             facestring = facestring + str(vertice) + "//" + str(vertice) + " "
         nf.write(facestring)
     nf.close()
-    print("Finished")
+
+    # return json
+    flines = []
+    filepath = r"models/sf.obj"
+    with open(filepath) as f:
+        for fline in f:
+            flines.append(fline.replace("\\", ""))
+    return jsonify({'parsedModel': flines})
