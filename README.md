@@ -12,3 +12,8 @@ The Python backend houses the business logic for modle parsing, analysis, and ge
 
 > **Takes** Nothing yet
 > **Returns** An OBJ model serialized to JSON.
+
+**GET /getSunVector**
+
+> **Takes** Nothing yet
+> **Returns** A string representation of the Sun Vector.
