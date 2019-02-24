@@ -15,5 +15,15 @@ The Python backend houses the business logic for modle parsing, analysis, and ge
 
 **GET /getSunVector**
 
-> **Takes** Nothing yet
+> **Takes** Body of data with the follwing param headers:
+```json
+{
+    "address": "ib schonbergs alle 2 valby",
+    "month": 6,
+    "day": 21,
+    "hour": 12
+}
+```
 > **Returns** A string representation of the Sun Vector.
+
+![api](assets/api.png)

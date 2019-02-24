@@ -2,6 +2,7 @@ import math
 from flask import Flask
 from flask import request
 from flask.json import jsonify
+import json
 import os
 
 app = Flask(__name__)
@@ -74,10 +75,10 @@ def cutObj():
         # as test, using only objects 0-10
         objects = "".join(flines).split("o ")[1:]
 
-    print("Parsing through {} obj objects".format(len(objects)))
+    # print("Parsing through {} obj objects".format(len(objects)))
 
     for objectnr, object in enumerate(objects):
-        # print("object {}".format(str(objectnr)))
+        # # print("object {}".format(str(objectnr)))
 
         for linenr, line in enumerate(object.split("\n")):
             if line[0:2] == "v ":
@@ -86,7 +87,7 @@ def cutObj():
                 vertices.append([x, y, z])
 
             elif line[0:2] == "f ":
-                # print " - facenr %s" % linenr
+                # # print " - facenr %s" % linenr
                 facevertices = line.split(" ")[1:]
 
                 # facelist = " ,".join(facevertices)
@@ -116,12 +117,12 @@ def cutObj():
                             tempvertices.append([vx, vy, vz])
                     temppoints.append(len(o_vertices)+len(temppoints)+1)
                 if len(penalty) == 0:
-                    # print "Added to o_faces: ", temppoints
+                    # # print "Added to o_faces: ", temppoints
                     o_faces.append(temppoints)
 
                     for x in tempvertices:
                         o_vertices.append(x)
-                        # print "Added to o_vertices [%s -> %s]: %s" % (vn, len(o_vertices), x)
+                        # # print "Added to o_vertices [%s -> %s]: %s" % (vn, len(o_vertices), x)
 
     nf = open(outputfile, "w")
     nf.write("""# Rhino
@@ -148,17 +149,26 @@ def cutObj():
 
 @app.route("/getSunVector")
 def getSunVector():
-    UIAdresse = "ib schonbergs alle 2 valby"
-    UImonth = 6
-    UIday = 21
-    UIhour = 12
+    # UIAdresse = "ib schonbergs alle 2 valby"
+    # UImonth = 6
+    # UIday = 21
+    # UIhour = 12
+
+    temp = json.loads(request.data)
+    print(temp['month'])
+
+    UIAdresse = temp['address']
+    UImonth = temp['month']
+    UIday = temp['day']
+    UIhour = temp['hour']
+
 
     from geopy.geocoders import Nominatim
     geolocator = Nominatim(user_agent="UrbanInsight")
     location = geolocator.geocode(UIAdresse)
-    print(location.address)
+    # print(location.address)
 
-    print((location.latitude, location.longitude))
+    # print((location.latitude, location.longitude))
 
     from timezonefinder import TimezoneFinder
 
@@ -185,7 +195,7 @@ def getSunVector():
 
     timez = dict({'lat':lati, 'lng':long})
     tz =(offset(timez) / 60)
-    print(tz)
+    # print(tz)
 
     from ladybug.sunpath import Sunpath
     from ladybug.location import Location
@@ -196,7 +206,7 @@ def getSunVector():
     sp = Sunpath.from_location(city)
     sun = sp.calculate_sun(month=UImonth, day=UIday, hour=UIhour)
 
-    print('altitude: {}, azimuth: {}'.format(sun.altitude, sun.azimuth))
+    # print('altitude: {}, azimuth: {}'.format(sun.altitude, sun.azimuth))
 
     from ladybug.dt import DateTime
 
@@ -214,7 +224,12 @@ def getSunVector():
     is_daylight_saving = "false"
     north_angle = 0
     sn = Sun(DateTime, altitude, azimuth, is_solar_time, is_daylight_saving, north_angle, data=None)
-    print(sun.sun_vector)
+    # print(sun.sun_vector)
     vector = str(sun.sun_vector)
-    return jsonify({'sunVector': vector})
+    returnRequest = str(request.data)
+    
+    #temp = json.loads(request.data)
+    #print(temp['name'])
+    return jsonify({'sunVector': vector, 'request': returnRequest})
+
 
