@@ -2,12 +2,14 @@ import math
 from flask import Flask
 from flask import request
 from flask.json import jsonify
+from flask_cors import CORS
 import json
 import os
 
 app = Flask(__name__)
 
 resource_path = os.path.join(app.root_path, 'models')
+CORS(app)
 
 @app.route("/")
 def hello():
