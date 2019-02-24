@@ -108,3 +108,5 @@ models/\.DS_Store
 \.DS_Store
 
 models/
+
+*.obj

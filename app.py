@@ -32,8 +32,8 @@ def func02():
 
 @app.route("/cutObj")
 def cutObj():
-    filepath = r"C:\Users\MANI\Downloads\SAN FRANCISCO 3D-GE.obj"
-    outputfile = r"C:\Users\MANI\Downloads\SANF_output.obj"
+    filepath = r"models/sf.obj"
+    outputfile = r"sfParsed.obj"
 
     # Coordinates for focus points (rhino coordinates)
     cx = -1200.0
