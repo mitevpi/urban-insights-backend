@@ -1,18 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[99]:
-
-
-#Input
-
 UIAdresse = "ib schonbergs alle 2 valby"
 UImonth = 6
 UIday = 21
 UIhour = 12
-
-
-# In[100]:
 
 
 from geopy.geocoders import Nominatim
@@ -21,10 +10,6 @@ location = geolocator.geocode(UIAdresse)
 print(location.address)
 
 print((location.latitude, location.longitude))
-
-
-# In[101]:
-
 
 from timezonefinder import TimezoneFinder
 
@@ -53,10 +38,6 @@ timez = dict({'lat':lati, 'lng':long})
 tz =(offset(timez) / 60)
 print(tz)
 
-
-# In[102]:
-
-
 from ladybug.sunpath import Sunpath
 from ladybug.location import Location
 
@@ -68,21 +49,12 @@ sun = sp.calculate_sun(month=UImonth, day=UIday, hour=UIhour)
 
 print('altitude: {}, azimuth: {}'.format(sun.altitude, sun.azimuth))
 
-
-# In[103]:
-
-
 from ladybug.dt import DateTime
 
 _year_ = 2016
 _minute_ = 0
 
-
 mydate = DateTime(UImonth, UIday, UIhour)
-
-
-# In[97]:
-
 
 from ladybug.sunpath import Sun
 import math
@@ -94,18 +66,5 @@ is_daylight_saving = "false"
 north_angle = 0
 sn = Sun(DateTime, altitude, azimuth, is_solar_time, is_daylight_saving, north_angle, data=None)
 print(sun.sun_vector)
-
-
-# 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
+print(str(sun.sun_vector))
 
