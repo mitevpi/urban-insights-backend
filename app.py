@@ -14,6 +14,10 @@ app = Flask(__name__)
 resource_path = os.path.join(app.root_path, 'models')
 CORS(app)
 
+@app.route("/")
+def home():
+    return jsonify({'test': 1})
+
 @app.route("/test01")
 def func02():
     flines = []
@@ -149,3 +153,6 @@ def cutObj():
             flines.append(fline.replace("\\", ""))
     return jsonify({'parsedModel': flines})
 
+
+if __name__ == "__main":
+    app.run()
