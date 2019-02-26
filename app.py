@@ -1,6 +1,7 @@
 import json
 import os
 import math
+
 from flask import Flask
 from flask import request
 from flask.json import jsonify
@@ -23,6 +24,13 @@ def func02():
             flines.append(fline.replace("\\", ""))
     return jsonify({'test': flines})
     #return flines
+
+@app.route("/getSunVector")
+def runSunVector():
+    data = json.loads(request.data)
+    vector = getSunVector(data['address'], data['month'], data['day'], data['hour'])
+
+    return jsonify({'sunVector': vector, 'request': data})
 
 
 @app.route("/cutObj")
@@ -140,12 +148,4 @@ def cutObj():
         for fline in f:
             flines.append(fline.replace("\\", ""))
     return jsonify({'parsedModel': flines})
-
-@app.route("/getSunVector")
-def runSunVector():
-    data = json.loads(request.data)
-    vector = getSunVector(data['address'], data['month'], data['day'], data['hour'])
-
-    return jsonify({'sunVector': vector, 'request': data})
-
 

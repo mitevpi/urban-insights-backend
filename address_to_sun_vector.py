@@ -2,30 +2,23 @@ import math
 import json
 import os
 
+from pytz import timezone
+import pytz
+from geopy.geocoders import Nominatim
+from datetime import datetime
+from timezonefinder import TimezoneFinder
+
+from ladybug.sunpath import Sunpath
+from ladybug.location import Location
+from ladybug.sunpath import Sun
+from ladybug.dt import DateTime
+
 
 def getSunVector(input_address, input_month, input_day, input_hour):
-
-    # temp = json.loads(request.data)
-    # print(temp['month'])
-
-    # input_address = temp['address']
-    # input_month = temp['month']
-    # input_day = temp['day']
-    # input_hour = temp['hour']
-
-
-    from geopy.geocoders import Nominatim
     geolocator = Nominatim(user_agent="UrbanInsight")
     location = geolocator.geocode(input_address)
 
-    from timezonefinder import TimezoneFinder
-
     tf = TimezoneFinder()
-
-    from pytz import timezone
-    import pytz
-    from datetime import datetime
-
     utc = pytz.utc
 
     def offset(target):
@@ -45,8 +38,6 @@ def getSunVector(input_address, input_month, input_day, input_hour):
     tz =(offset(timez) / 60)
     # print(tz)
 
-    from ladybug.sunpath import Sunpath
-    from ladybug.location import Location
 
     city = Location('City', 'Country', latitude=lati, longitude=long, time_zone=tz)
 
@@ -56,15 +47,10 @@ def getSunVector(input_address, input_month, input_day, input_hour):
 
     # print('altitude: {}, azimuth: {}'.format(sun.altitude, sun.azimuth))
 
-    from ladybug.dt import DateTime
-
     _year_ = 2016
     _minute_ = 0
 
     mydate = DateTime(input_month, input_day, input_hour)
-
-    from ladybug.sunpath import Sun
-    import math
 
     altitude = sun.altitude_in_radians
     azimuth = sun.azimuth_in_radians
