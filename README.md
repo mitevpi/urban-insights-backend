@@ -2,7 +2,7 @@
 
 Backend for Urban Insights App.
 
-[![Generic badge](https://img.shields.io/badge/Deployment-Heroku-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Deployment-Heroku-green.svg)](https://urban-insights-api.herokuapp.com)
 
 ## Purpose
 
