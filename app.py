@@ -1,6 +1,5 @@
 import json
 import os
-import math
 
 from flask import Flask
 from flask import request
