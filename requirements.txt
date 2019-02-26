@@ -1,0 +1,6 @@
+Flask==1.0.2
+Flask-Cors==3.0.7
+geopy==1.18.1
+lbt-ladybug==0.0.12
+pytz==2018.9
+timezonefinder==3.4.2
