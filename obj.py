@@ -1,3 +1,5 @@
+import math
+
 def cutObj():
     filepath = r"models/sf.obj"
     outputfile = r"sfParsed.obj"
@@ -111,4 +113,6 @@ def cutObj():
     with open(filepath) as f:
         for fline in f:
             flines.append(fline.replace("\\", ""))
-    return jsonify({'parsedModel': flines})
+    
+    return flines
+    #return jsonify({'parsedModel': flines})
