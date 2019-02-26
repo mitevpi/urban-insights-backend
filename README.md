@@ -2,6 +2,8 @@
 
 Backend for Urban Insights App.
 
+[![Generic badge](https://img.shields.io/badge/Deployment-Heroku-green.svg)](https://shields.io/)
+
 ## Purpose
 
 The Python backend houses the business logic for modle parsing, analysis, and geometry operations which are fed back into the frontend for realtime visualization with AR/VR.
