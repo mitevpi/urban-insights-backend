@@ -8,6 +8,16 @@ Backend for Urban Insights App.
 
 The Python backend houses the business logic for modle parsing, analysis, and geometry operations which are fed back into the frontend for realtime visualization with AR/VR.
 
+## Developing and Deploying
+
+### Develop
+
+To develop the application locally, type `flask run` into the root directory of this repository. You can test methods locally with Postman using this configuration.
+
+### Auto-Deploy to Heroku
+
+Deployments happen automatically from the `deploy` branch of this repository. Once the `deploy` branch sees comitted changes, Heroku will rebuild the deployment at [this link](https://urban-insights-api.herokuapp.com). Once you're ready to deploy the changes from your local branch, just make a merge request into `deploy` and the build will happen automatically.
+
 ## Endpoints
 
 **GET /cutObj**
